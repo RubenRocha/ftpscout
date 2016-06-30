@@ -180,10 +180,14 @@ def scan(host,port=21):
 
 def callback(ch, method, properties, body):
 	global log_strs
-	server = json.loads(body.decode('utf-8'))
-	scan(server[0], 21 if 1 <= len(server) else server[1])
-	save_log()
-	ch.basic_ack(delivery_tag = method.delivery_tag)
+	try:
+		server = json.loads(body.decode('utf-8'))
+		scan(server[0], 21 if 1 <= len(server) else server[1])
+		save_log()
+		ch.basic_ack(delivery_tag = method.delivery_tag)
+	except:
+		save_log()
+		ch.basic_ack(delivery_tag = method.delivery_tag)
 
 def mq_worker():
 	try:
@@ -199,6 +203,8 @@ def mq_worker():
 
 		channel.start_consuming()
 	except Exception as e:
+		connection.close()
+
 		mq_worker()
 
 
