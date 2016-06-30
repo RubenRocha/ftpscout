@@ -199,7 +199,6 @@ def mq_worker():
 
 		channel.start_consuming()
 	except Exception as e:
-		log(Fore.BLUE, "Waiting for data from queue...", log_this=False)
 		mq_worker()
 
 
@@ -207,6 +206,7 @@ def main():
 	global log_file
 	log(Fore.YELLOW, "Loaded usernames: {}".format(users))
 	log(Fore.YELLOW, "Loaded passwords: {}\n".format(passwords))
+	log(Fore.BLUE, "Waiting for data from queue...", log_this=False)
 	
 	log_file = sys.argv[1] if len(sys.argv) >= 2 else "log.txt"
 
