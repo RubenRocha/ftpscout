@@ -112,7 +112,7 @@ def differenciate_list(custom_list, real_list, l_type):
 
 def port_check(host, port):
 	try:
-		socket.setdefaulttimeout(0.650)
+		socket.setdefaulttimeout(1)
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		res = s.connect_ex((host,port))
 		s.close()
@@ -206,8 +206,8 @@ def mq_worker():
 
 def main():
 	global log_file
-	log(Fore.YELLOW, "Loaded usernames: {}".format(users))
-	log(Fore.YELLOW, "Loaded passwords: {}\n".format(passwords))
+	log(Fore.YELLOW, "Loaded {} usernames.".format(len(users)))
+	log(Fore.YELLOW, "Loaded {} passwords.\n".format(len(passwords)))
 	log(Fore.BLUE, "Waiting for data from queue...", log_this=False)
 	
 	log_file = sys.argv[1] if len(sys.argv) >= 2 else "log.txt"
