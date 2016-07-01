@@ -30,8 +30,8 @@ init()
 
 log_file = ""
 log_strs = []
-users = ["anonymous", "root"]
-passwords = ["guest","anonymous"," ", "", "toor"]
+users = ["anonymous", "root", "admin"]
+passwords = ["guest","anonymous","admin", "toor", " ", ""]
 
 mq_queue="task_queue2"
 
@@ -68,10 +68,10 @@ def try_login(custom_users, custom_passwords, host, port):
 					con.close()
 					continue
 			except socket.timeout:
-				anon_login = "Disallowed/Timed out"
+				anon_login = "Timed out"
 				return (anon_login, None)
 			except Exception as e:
-				anon_login = "Disallowed/Error"
+				anon_login = "Disallowed"
 	return (anon_login, None)
 
 def get_banner(host,port):
@@ -87,7 +87,7 @@ def get_banner(host,port):
 		else:
 			return ans
 	except Exception as e:
-		return "Error/Can't connect"
+		return "Error obtaining banner"
 
 def get_directory_listing(ftp_con):
 	try:
@@ -150,10 +150,10 @@ def scan(host,port=21):
 		banner = get_banner(host, port)
 
 		if "Timed out" in anon_login:
-			log(Fore.RED, "Results for {}:{} \r\n\t-> Timed out".format(host,port))
+			log(Fore.RED, "Results for {}:{} \r\n\t-> Timed out\n".format(host,port))
 			return
 
-		if "Error" in anon_login:
+		if "Disallowed" in anon_login:
 			log(Fore.RED,	("Results for {}:{} \r\n" +
 						"\t-> Anonymous access: {}\r\n" +
 						"\t-> FTP banner: {}\n")
@@ -161,9 +161,7 @@ def scan(host,port=21):
 			)
 			return
 		
-		log_color = Fore.RED if "Disallowed" in anon_login else Fore.GREEN
-
-		log(log_color,	("Results for {}:{} \r\n" +
+		log(Fore.GREEN,	("Results for {}:{} \r\n" +
 						"\t-> Anonymous access: {}\r\n" +
 						"\t-> FTP banner: {}\r\n" + 
 						"\t-> Dir listing: {}\n")

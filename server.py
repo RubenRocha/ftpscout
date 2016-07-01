@@ -27,8 +27,8 @@ while len(servers) > 0:
                         properties=pika.BasicProperties(
                             delivery_mode = 2, # make message persistent
                         ))
-    if len(servers) % 256 == 0:
-        print("[-] Progress {}% [{}/{}]".format(
+    if len(servers) % 512 == 0:
+        print("[-] Progress {:.3f}% [{}/{}]".format(
             ((servers_len-len(servers))/servers_len)*100, 
             servers_len-len(servers), 
             servers_len
