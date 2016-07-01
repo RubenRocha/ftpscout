@@ -30,8 +30,8 @@ init()
 
 log_file = ""
 log_strs = []
-users = ["anonymous"]
-passwords = ["guest","anonymous"," ", ""]
+users = ["anonymous", "root"]
+passwords = ["guest","anonymous"," ", "", "toor"]
 
 mq_queue="task_queue2"
 
@@ -69,13 +69,9 @@ def try_login(custom_users, custom_passwords, host, port):
 					continue
 			except socket.timeout:
 				anon_login = "Disallowed/Timed out"
-				con.quit()
-				con.close()
 				return (anon_login, None)
 			except Exception as e:
 				anon_login = "Disallowed/Error"
-				con.quit()
-				con.close()
 	return (anon_login, None)
 
 def get_banner(host,port):

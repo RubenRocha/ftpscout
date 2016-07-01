@@ -10,8 +10,8 @@ setup(
         license=open(join(dirname(__file__), 'LICENSE')).read(),
         packages=find_packages(),
 	py_modules=['ftpscout'],
-	install_requires=["colorama", "pika"],
-        description='A multi-threaded Admin Finder.',
+	install_requires=["colorama", "pika", "netaddr"],
+        description='A multi-threaded ftp anonymous access scanner',
         long_description=open(join(dirname(__file__), 'README.md')).read(),
         classifiers=[
             'Programming Language :: Python :: 3.4',

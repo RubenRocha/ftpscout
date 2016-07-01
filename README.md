@@ -68,4 +68,5 @@ $ python3 server.py list.txt
 It also includes a tool for adding ip ranges (CIDR) easily
 ```sh
 $ ./cidr_scout.sh 192.168.1.0/24
+$ ./cidr_scout.sh 192.168.1.0/24 127.0.0.0/24
 ```
