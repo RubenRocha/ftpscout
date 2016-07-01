@@ -27,7 +27,7 @@ while len(servers) > 0:
                         properties=pika.BasicProperties(
                             delivery_mode = 2, # make message persistent
                         ))
-    if len(servers) % 100 == 0:
+    if len(servers) % 256 == 0:
         print("[-] Progress {}% [{}/{}]".format(
             ((servers_len-len(servers))/servers_len)*100, 
             servers_len-len(servers), 
@@ -35,5 +35,5 @@ while len(servers) > 0:
         ))
     servers.pop(0)
 
-print("[-] Finished sending".format(server))
+print("[-] [finished] Progress 100% [{}/{}]".format(servers_len, servers_len))
 connection.close()
