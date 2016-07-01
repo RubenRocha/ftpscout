@@ -2,6 +2,8 @@
 
 > Scanning ftps for anonymous access
 
+![ftpscout](https://i.imgur.com/CohQgcC.png)
+
 ### Installation
 ftpscout uses RabbitMQ to manage the queues
 
